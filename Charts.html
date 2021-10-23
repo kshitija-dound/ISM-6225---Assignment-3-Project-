@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Visualizations </title>
+
+    <style>
+
+        .topnav {
+            overflow: hidden;
+            background-color: #941414;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+                margin-bottom: 0 !important;
+                border: 0 !important;
+            }
+
+                .topnav a:hover {
+                    background-color: white;
+                    color: black;
+                }
+
+                .topnav a.active {
+                    background-color: #159494;
+                    color: white;
+                }
+
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+
+
+        h2 {
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .boxed {
+            background-color: #941414;
+            border: 5px solid black;
+            padding: 0px;
+            height: 780px;
+            margin-left: 40px;
+            margin-right: 40px;
+            border-radius: 10px;
+        }
+
+        /* Three image containers (use 25% for four, and 50% for two, etc) */
+        .column {
+            float: left;
+            width: 32.5%;
+            padding: 5px;
+            display: flex;
+        }
+
+
+        /* Clear floats after image containers */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        img {
+            border: 3px solid white;
+            width: 350px;
+            height: 350px;
+        }
+
+        img, p {
+            display: inline-block;
+        }
+
+        .float-container {
+            padding: 20px;
+        }
+
+        .float-child {
+            width: 20%;
+            float: left;
+            padding: 20px;
+        }
+
+        p {
+            color: white;
+            text-align: center;
+            left: 600px;
+        }
+
+
+        a {
+            color: #ffd700;
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            font-size: 30px;
+            text-align: center
+        }
+        .chartBox {
+            width: 300px;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="topnav">
+
+        <a href="index.html">Home</a>
+        <a href="main.html"> About Covid-19</a>
+        <a class="active" href="Charts.html">Visualizations </a>
+        <a href="Deaths.html">Deaths</a>
+        <a href="helpfulresources.html">Helpful Resources</a>
+        <a href="AboutUs.html">About Us</a>
+
+
+    </div>
+
+    
+            <div class="Chartbox">
+                <h2>Covid Death Condition wise - Bar Chart </h2>
+                <canvas id="BarChart" style="height:500px; width:100%;max-width:800px; margin-left:300px; width:320px; height:320px "></canvas>
+            </div>
+
+           
+            <div class="Chartbox">
+                <h2>Covid Death Condition wise - Pie Chart </h2>
+
+                <canvas id="PieChart" style="height: 500px; width: 100%; max-width: 800px; margin-left: 380px; width: 320px; height: 320px"></canvas>
+            </div>
+    </div>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+            <script>
+
+                //const data
+                const data = {
+                    labels: ["All other conditions and residual", "Alzhiemer", "Circulatory Diseases", "Covid 19",
+                        "Diabetes", "Intentional & unintensional injury, poisoning, and adverse events", "Malignant Neoplasms",
+                        "Obesity", "Renal Failure", "Respiratory Diseases", "Sepsis", "Vascular and unspecified dementia"],
+
+                    datasets: [{
+                        defaultFontColor: 'red',
+                        pointBackgroundColor: "red",
+                        pointBorderColor: "#fff",
+                        lineTension: 0,
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "rgba(179,181,198,1)",
+
+                        data: [275566, 22873, 480712, 708289, 110766, 14715, 33754, 32886, 72907, 796060, 68949, 61577],
+
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#86CEE8",
+                            "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#86CEE8",
+                            "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#86CEE8", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#86CEE8"]
+                    }]
+                };
+
+                const config1 = {
+                    type: 'bar',
+                    data,
+                    options: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Covid Death Count Bar Chart',
+                            fontStyle: "bold"
+                        },
+                        scales: {
+                            pointLabels: {
+                                fontStyle: "bold",
+                            },
+                            y: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                },
+                                fontSize: 17,
+                                padding: -9
+                            }],
+                            x: [{
+                                gridLines: {
+                                    display: false
+                                },
+                                ticks: {
+                                    beginAtZero: true,
+                                    display: false
+                                },
+                                fontSize: 17,
+                                padding: -9
+                            }]
+                        },
+
+                    }
+                };
+
+                const config2 = {
+                    type: 'pie',
+                    data,
+
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Covid Death Count Pie Chart',
+
+                        },
+                    }
+
+                };
+
+                const myChart = new Chart(
+                    document.getElementById('BarChart'), config1
+                );
+                    
+               const myChart1 = new Chart(
+               document.getElementById('PieChart'), config2
+               );
+                      
+
+
+
+            </script>
+
+
+
+
+</body>
+</html>
+
+
+
